@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bank Marketing – Term Deposit Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="container">
+  <h1>Predict Term Deposit Subscription</h1>
+  <form method="POST" action="/predict" class="grid">
+    <!-- Categorical controls -->
+    <label>Job
+      <select name="job" required>
+        {% for opt in choices['job'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Marital
+      <select name="marital" required>
+        {% for opt in choices['marital'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Education
+      <select name="education" required>
+        {% for opt in choices['education'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Default
+      <select name="default" required>
+        {% for opt in choices['default'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Housing
+      <select name="housing" required>
+        {% for opt in choices['housing'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Loan
+      <select name="loan" required>
+        {% for opt in choices['loan'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Contact
+      <select name="contact" required>
+        {% for opt in choices['contact'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Month
+      <select name="month" required>
+        {% for opt in choices['month'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Day of Week
+      <select name="day_of_week" required>
+        {% for opt in choices['day_of_week'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>Previous Outcome
+      <select name="poutcome" required>
+        {% for opt in choices['poutcome'] %}
+        <option value="{{ opt }}">{{ opt }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <!-- Numeric controls -->
+    <label>Age <input type="number" name="age" step="1" required></label>
+    <label>Duration (sec) <input type="number" name="duration" step="1" required></label>
+    <label>Campaign (contacts during this campaign) <input type="number" name="campaign" step="1" required></label>
+    <label>pdays (days since last contact; 999 = never) <input type="number" name="pdays" step="1" required></label>
+    <label>previous (contacts before this campaign) <input type="number" name="previous" step="1" required></label>
+    <label>emp.var.rate <input type="number" name="emp.var.rate" step="0.1" required></label>
+    <label>cons.price.idx <input type="number" name="cons.price.idx" step="0.1" required></label>
+    <label>cons.conf.idx <input type="number" name="cons.conf.idx" step="0.1" required></label>
+    <label>euribor3m <input type="number" name="euribor3m" step="0.01" required></label>
+    <label>nr.employed <input type="number" name="nr.employed" step="1" required></label>
+
+    <div class="full">
+      <button type="submit">Predict</button>
+    </div>
+  </form>
+
+  {% if prediction_text %}
+  <div class="result">
+    {{ prediction_text }}
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>

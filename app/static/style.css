@@ -1,0 +1,11 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, sans-serif; background: #f7f7fb; margin: 0; }
+.container { max-width: 980px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+h1 { margin-top: 0; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+label { display: flex; flex-direction: column; font-size: 14px; gap: 6px; }
+input, select, button { padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
+button { background: #2d6cdf; color: #fff; border: none; cursor: pointer; }
+button:hover { background: #1f54b8; }
+.full { grid-column: 1 / -1; }
+.result { margin-top: 18px; padding: 12px 14px; background: #eef5ff; border: 1px solid #cfe2ff; border-radius: 8px; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
