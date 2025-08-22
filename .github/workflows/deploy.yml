@@ -39,3 +39,9 @@ jobs:
       # Push whole repo to Heroku 
       - name: Deploy to Heroku
         run: git push -f heroku main
+
+      # Build & push Docker image to Heroku
+      - name: Build and push Docker image
+        run: |
+          heroku container:push web -a ${{ secrets.HEROKU_APP_NAME }}
+          heroku container:release web -a ${{ secrets.HEROKU_APP_NAME }}

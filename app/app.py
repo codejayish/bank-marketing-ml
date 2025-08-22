@@ -18,23 +18,23 @@ def index():
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        # Build one-row DataFrame from form
+     
         data = {}
-        # categorical fields
+    
         for col in CATEGORICAL_COLS:
             data[col] = [request.form.get(col)]
-        # numeric fields (cast to float)
+      
         for col in NUMERIC_COLS:
             val = request.form.get(col)
             data[col] = [float(val) if val not in (None, "",) else 0.0]
 
         df = pd.DataFrame(data)
-        pred = model.predict(df)[0]     # "yes" or "no"
+        pred = model.predict(df)[0]  
         proba = None
-        # try probability if available
+
         if hasattr(model, "predict_proba"):
             try:
-                proba = model.predict_proba(df)[0, 1]  # probability of "yes"
+                proba = model.predict_proba(df)[0, 1] 
             except Exception:
                 proba = None
 
@@ -47,5 +47,4 @@ def predict():
         return render_template("index.html", choices=CHOICES, prediction_text=f"Error: {e}")
 
 if __name__ == "__main__":
-    # For local dev; you can later add Procfile for Heroku
     app.run(host="0.0.0.0", port=5000, debug=True)

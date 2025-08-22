@@ -1,8 +1,8 @@
 # src/schema.py
 
-TARGET_COL = "y"  # yes/no
+TARGET_COL = "y"  
 
-# Bank Marketing (UCI "bank-additional-full.csv") expected columns
+
 CATEGORICAL_COLS = [
     "job", "marital", "education", "default", "housing", "loan",
     "contact", "month", "day_of_week", "poutcome"
@@ -16,7 +16,7 @@ NUMERIC_COLS = [
 
 ALL_COLS = CATEGORICAL_COLS + NUMERIC_COLS + [TARGET_COL]
 
-# For UI dropdowns (aligned with dataset)
+
 CHOICES = {
     "job": ["admin.", "blue-collar", "entrepreneur", "housemaid", "management",
             "retired", "self-employed", "services", "student", "technician",

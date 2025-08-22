@@ -23,7 +23,7 @@ from joblib import dump
 from .schema import TARGET_COL, CATEGORICAL_COLS, NUMERIC_COLS
 from .data_utils import load_bank_marketing_df
 
-# xgboost optional
+
 try:
     from xgboost import XGBClassifier
     HAS_XGB = True
@@ -106,8 +106,7 @@ def evaluate(model: Pipeline, X, y) -> Dict[str, Any]:
     """
     y_pred = model.predict(X)
 
-    # FIX: If predictions are numeric (from XGBoost), convert them to strings
-    # This ensures y_pred and y have the same data type for comparison.
+   
     if np.issubdtype(y_pred.dtype, np.number):
         y_pred = np.where(y_pred == 1, "yes", "no")
 
@@ -126,14 +125,14 @@ def main():
     df = load_bank_marketing_df()
     print("Shape:", df.shape)
 
-    # Ensure columns exist
+
     missing = set(CATEGORICAL_COLS + NUMERIC_COLS + [TARGET_COL]) - set(df.columns)
     if missing:
         raise ValueError(f"Missing expected columns: {missing}")
 
-    # Split 70/15/15
+    
     X = df[CATEGORICAL_COLS + NUMERIC_COLS].copy()
-    y = df[TARGET_COL].astype(str)  # keep as "yes"/"no"
+    y = df[TARGET_COL].astype(str)  
 
     X_train_full, X_test, y_train_full, y_test = train_test_split(
         X, y, test_size=0.15, random_state=42, stratify=y
@@ -154,7 +153,7 @@ def main():
               f"P={sc['precision_yes']:.4f}  R={sc['recall_yes']:.4f}")
         print(sc["report"])
 
-    # Select best by F1
+    
     best_name = max(val_scores, key=lambda k: val_scores[k]["f1_yes"])
     best_model = models[best_name]
     print(f"\n>>> Best on validation: {best_name}")
