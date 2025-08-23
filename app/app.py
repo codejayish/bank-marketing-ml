@@ -17,8 +17,7 @@ def index():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    try:
-     
+    try: 
         data = {}
     
         for col in CATEGORICAL_COLS:
