@@ -38,7 +38,7 @@ jobs:
           } > ~/.netrc
 
       # Build & deploy only the heroku-app/ subtree
-      - name: Push heroku-app/ subtree to Heroku
+      - name: Push app/ subtree to Heroku
         run: |
           git subtree split --prefix heroku-app -b heroku-deploy
           git push -f heroku heroku-deploy:main
